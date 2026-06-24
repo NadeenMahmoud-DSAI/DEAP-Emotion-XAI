@@ -1,2 +1,49 @@
-DEAP-Emotion-XAI: Subject-Independent EEG Emotion RecognitionProject OverviewThis repository contains a comprehensive empirical evaluation of machine learning and deep learning architectures for electroencephalogram (EEG)-based emotion recognition. The primary focus is strictly on cross-subject generalizability. To bridge the gap between black-box deep learning models and clinical neuroscientific utility, an explicit Explainable AI (XAI) diagnostic framework is paired with every architecture.  Dataset and PreprocessingThe benchmark Database for Emotion Analysis using Physiological Signals (DEAP) dataset is utilized for all evaluations.  The scope encompasses 31 subjects, following the strategic exclusion of Subject 4 due to severe signal degradation and persistent high-amplitude ocular artifacts.  The target task is binary valence classification, where subjective continuous self-assessment ratings are mapped into a binary target vector using a midpoint threshold of 5.  Signals are standardized using subject-wise Z-score normalization to eliminate variations in skin-electrode impedance and baseline voltage amplitudes:
-  $$\hat{x}_{c}(t)=\frac{x_{c}(t)-\mu_{s}}{\sigma_{s}}$$Architectural ParadigmsThirteen distinct configurations are evaluated across three separate data representation tracks:  Paradigm I (Raw Spatial-Temporal Sequences): Standardized voltage streams are routed directly to native spatial-temporal architectures, including 1D Convolutional Neural Networks (ZhaoCNN) and 1D EEGNet.  Paradigm II (Engineered Spectral & Topological Sequences): Utilizes Differential Entropy (DE) and Pearson functional connectivity matrices mapped to non-Euclidean graph connectivity models (PearsonLSTM, SOGPCN) and deep sequence attention frameworks (Transformer-BiLSTM, ERTNet, 4D-aNN).  Paradigm III (2D Log-Spectrogram Tensors): Independent channel images are stacked into spatial-frequency tensors and evaluated via computer vision-derived convolutions and self-attention blocks (AMDET, CNN-BiLSTM-MHSA, and 2D EEGNet).  Explainable AI (XAI) DiagnosticsTo mathematically interpret the learned weights, the following intrinsic and post-hoc XAI tools are implemented:  Functional connectivity heatmaps to decode macro-scale synchronization.  Mathematical spatial gradient saliency maps for raw spatial-temporal networks.  Topographical maps (topomaps) isolating spatial attribution spikes.  2D Grad-CAM time-frequency localization for models processing log-spectrogram tensors.  Key ResultsEmpirical evaluations are executed under a strict Leave-One-Subject-Out (LOSO) cross-validation framework.  The connectivity-driven PearsonLSTM architecture achieves the highest cross-subject generalization performance with a mean LOSO accuracy of 79.92%.  Post-hoc and intrinsic XAI diagnostic tools consistently isolate the frontal-parietal cortical axis as the primary user-agnostic marker of valence.  The spatial attributions provide empirical validation of established neuroscientific theories regarding emotional lateralization.  Repository StructureThe project codebase is organized into various Jupyter Notebooks handling exploratory data analysis (EDA), temporal preprocessing, and the construction of individual deep learning pipelines. A visual overview of the core file structure and version control history can be referenced in image_7adea8.png.description.txtA comparative study and codebase evaluating 13 deep learning architectures for subject-independent EEG emotion recognition utilizing the DEAP dataset. The project focuses on bridging the generalization gap in affective computing through the integration of non-Euclidean connectivity models (such as PearsonLSTM) and explicit Explainable AI (XAI) diagnostic frameworks. Interpretability tools, including Grad-CAM and functional connectivity heatmaps, are utilized to validate mathematical spatial gradient saliency against established neuroscientific theories of emotional lateralization.  
+# DEAP-Emotion-XAI: Subject-Independent EEG Emotion Recognition
+
+## Project Overview
+This repository contains a comprehensive empirical evaluation of machine learning and deep learning architectures for electroencephalogram (EEG)-based emotion recognition. The primary focus is strictly on cross-subject generalizability. To bridge the gap between black-box deep learning models and clinical neuroscientific utility, an explicit Explainable AI (XAI) diagnostic framework is paired with every architecture.
+
+---
+
+## Dataset and Preprocessing
+The benchmark Database for Emotion Analysis using Physiological Signals (DEAP) dataset is utilized for all evaluations. 
+
+* The scope encompasses 31 subjects, following the strategic exclusion of Subject 4 due to severe signal degradation and persistent high-amplitude ocular artifacts.
+* The target task is binary valence classification, where subjective continuous self-assessment ratings are mapped into a binary target vector using a midpoint threshold of 5.
+* Signals are standardized using subject-wise Z-score normalization to eliminate variations in skin-electrode impedance and baseline voltage amplitudes:
+
+$$
+\hat{x}_{c}(t)=\frac{x_{c}(t)-\mu_{s}}{\sigma_{s}}
+$$
+
+---
+
+## Architectural Paradigms
+Thirteen distinct configurations are evaluated across three separate data representation tracks:
+
+* **Paradigm I (Raw Spatial-Temporal Sequences):** Standardized voltage streams are routed directly to native spatial-temporal architectures, including 1D Convolutional Neural Networks (ZhaoCNN) and 1D EEGNet.
+* **Paradigm II (Engineered Spectral & Topological Sequences):** Utilizes Differential Entropy (DE) and Pearson functional connectivity matrices mapped to non-Euclidean graph connectivity models (PearsonLSTM, SOGPCN) and deep sequence attention frameworks (Transformer-BiLSTM, ERTNet, 4D-aNN).
+* **Paradigm III (2D Log-Spectrogram Tensors):** Independent channel images are stacked into spatial-frequency tensors and evaluated via computer vision-derived convolutions and self-attention blocks (AMDET, CNN-BiLSTM-MHSA, and 2D EEGNet).
+
+---
+
+## Explainable AI (XAI) Diagnostics
+To mathematically interpret the learned weights, the following intrinsic and post-hoc XAI tools are implemented:
+
+* Functional connectivity heatmaps to decode macro-scale synchronization.
+* Mathematical spatial gradient saliency maps for raw spatial-temporal networks.
+* Topographical maps (topomaps) isolating spatial attribution spikes.
+* 2D Grad-CAM time-frequency localization for models processing log-spectrogram tensors.
+
+---
+
+## Key Results
+* Empirical evaluations are executed under a strict Leave-One-Subject-Out (LOSO) cross-validation framework.
+* The connectivity-driven PearsonLSTM architecture achieves the highest cross-subject generalization performance with a mean LOSO accuracy of 79.92%.
+* Post-hoc and intrinsic XAI diagnostic tools consistently isolate the frontal-parietal cortical axis as the primary user-agnostic marker of valence.
+* The spatial attributions provide empirical validation of established neuroscientific theories regarding emotional lateralization.
+
+---
+
+## Repository Structure
+The project codebase is organized into various Jupyter Notebooks handling exploratory data analysis (EDA), temporal preprocessing, and the construction of individual deep learning pipelines. A visual overview of the core file structure and version control history can be referenced in `image_7adea8.png`.
